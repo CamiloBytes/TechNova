@@ -53,50 +53,56 @@ export const LoginFrom = () => {
     };
 
     return (
-        <div className="max-w-md mx-auto mt-10">
-            <h2 className="text-2xl font-bold mb-4">Login</h2>
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                <div className="p-field">
-                    <FloatLabel>
-                    <InputText
-                        id="user_name"
-                        {...register("user_name", { required: "Username is required" })}
-                        className="border-gray-100! w-full"
-                    />
-                    <label htmlFor="user_name">Username</label>
-                </FloatLabel>
-                    {errors.user_name && <p className="text-red-500 text-sm mt-1">{errors.user_name.message}</p>}
+        <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4 sm:px-6 lg:px-8">
+            <div className="max-w-md w-full bg-white rounded-lg shadow-sm border border-gray-200 p-6 sm:p-8">
+                <div className="text-center mb-6">
+                    <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">Login</h2>
+                    <p className="text-sm text-gray-600 mt-1">Welcome back to TechNova</p>
                 </div>
-                <div className="p-field">
-                    <FloatLabel>
-                    <Controller
-                        name="password"
-                        control={control}
-                        rules={{ required: "Password is required" }}
-                        render={({ field }) => (
-                            <Password
-                                inputId="password"
-                                value={field.value || ""}
-                                onChange={(e) => field.onChange(e.target.value)}
-                                feedback={false}
-                                toggleMask
-                            />
-                        )}
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                    <div className="p-field">
+                        <FloatLabel>
+                        <InputText
+                            id="user_name"
+                            {...register("user_name", { required: "Username is required" })}
+                            className="w-full"
+                        />
+                        <label htmlFor="user_name">Username</label>
+                        </FloatLabel>
+                        {errors.user_name && <p className="text-red-500 text-sm mt-1">{errors.user_name.message}</p>}
+                    </div>
+                    <div className="p-field">
+                        <FloatLabel>
+                        <Controller
+                            name="password"
+                            control={control}
+                            rules={{ required: "Password is required" }}
+                            render={({ field }) => (
+                                <Password
+                                    inputId="password"
+                                    value={field.value || ""}
+                                    onChange={(e) => field.onChange(e.target.value)}
+                                    feedback={false}
+                                    toggleMask
+                                />
+                            )}
+                        />
+                        <label htmlFor="password">Password</label>
+                        </FloatLabel>
+                        {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
+                    </div>
+                    <Button
+                        type="submit"
+                        label={isLoading ? 'Logging in...' : 'Login'}
+                        disabled={isLoading}
+                        size="small"
+                        className="w-full px-4 py-2 text-sm"
                     />
-                    <label htmlFor="password">Password</label>
-                </FloatLabel>
-                    {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
-                </div>
-                <Button
-                    type="submit"
-                    label={isLoading ? 'Logging in...' : 'Login'}
-                    disabled={isLoading}
-                    className="w-full"
-                />
-            </form>
-            <p className="mt-4">
-                Don't have an account? <a href="/register" className="text-blue-500">Register</a>
-            </p>
+                </form>
+                <p className="mt-6 text-center text-sm sm:text-base text-gray-600">
+                    Don't have an account? <a href="/register" className="text-blue-500 hover:text-blue-600">Register</a>
+                </p>
+            </div>
         </div>
     );
 };

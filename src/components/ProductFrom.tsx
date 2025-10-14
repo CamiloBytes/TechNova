@@ -80,12 +80,12 @@ export function ProductForm({ product, onSubmit, onCancel }: ProductFormProps) {
             onHide={onCancel}
             header={product ? 'Edit Product' : 'Add New Product'}
             modal
-            className="p-fluid"
-            style={{ width: '50vw' }}
+            className="p-fluid w-full max-w-md sm:max-w-lg md:max-w-2xl"
+            style={{ width: '90vw', maxWidth: '600px' }}
         >
 
-            <form onSubmit={handleSubmit(handleFormSubmit)} className="p-6 space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <form onSubmit={handleSubmit(handleFormSubmit)} className="p-4 sm:p-6 space-y-4 sm:space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                     <div>
                         <label htmlFor="sku" className="block text-sm font-medium text-gray-700 mb-2">
                             SKU <span className="text-red-500">*</span>
@@ -197,12 +197,13 @@ export function ProductForm({ product, onSubmit, onCancel }: ProductFormProps) {
                     </label>
                 </div>
 
-                <div className="flex gap-3 pt-4 border-t border-gray-200">
+                <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-gray-200">
                     <Button
                         type="submit"
                         label={product ? 'Update Product' : 'Create Product'}
                         loading={isSubmitting}
-                        className="flex-1"
+                        size="small"
+                        className="flex-1 w-full sm:w-auto px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base"
                     />
                     <Button
                         type="button"
@@ -210,7 +211,8 @@ export function ProductForm({ product, onSubmit, onCancel }: ProductFormProps) {
                         onClick={onCancel}
                         disabled={isSubmitting}
                         outlined
-                        className="flex-1"
+                        size="small"
+                        className="flex-1 w-full sm:w-auto px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base"
                     />
                 </div>
             </form>

@@ -63,23 +63,23 @@ export function ProductCard({ product, onEdit, onDelete }: ProductCardProps) {
                 </div>
             </div>
 
-            <CardBody className="flex-1 flex flex-col">
+            <CardBody className="flex-1 flex flex-col p-4 sm:p-6">
                 <div className="flex items-start justify-between mb-2">
-                    <h3 className="text-lg font-semibold text-gray-800 line-clamp-2">
+                    <h3 className="text-base sm:text-lg font-semibold text-gray-800 line-clamp-2">
                         {product.name}
                     </h3>
                 </div>
 
-                <div className="space-y-2 mb-4">
-                    <div className="flex items-center justify-between text-sm">
+                <div className="space-y-1 sm:space-y-2 mb-4">
+                    <div className="flex items-center justify-between text-xs sm:text-sm">
                         <span className="text-gray-600">Brand:</span>
                         <span className="font-medium text-gray-800">{product.brand}</span>
                     </div>
-                    <div className="flex items-center justify-between text-sm">
+                    <div className="flex items-center justify-between text-xs sm:text-sm">
                         <span className="text-gray-600">SKU:</span>
                         <span className="font-mono text-gray-800">{product.sku}</span>
                     </div>
-                    <div className="flex items-center justify-between text-sm">
+                    <div className="flex items-center justify-between text-xs sm:text-sm">
                         <span className="text-gray-600">Stock:</span>
                         <span className={`font-medium ${product.quantity > 10 ? 'text-green-600' : product.quantity > 0 ? 'text-yellow-600' : 'text-red-600'}`}>
                             {product.quantity} units
@@ -88,31 +88,31 @@ export function ProductCard({ product, onEdit, onDelete }: ProductCardProps) {
                 </div>
 
                 <div className="flex items-center gap-2 mb-4">
-                    <Badge severity={getCategoryColor(product.category)} value={product.category} />
+                    <Badge severity={getCategoryColor(product.category)} value={product.category} className="text-xs sm:text-sm" />
                 </div>
 
-                <div className="text-2xl font-bold text-blue-600 mt-auto">
+                <div className="text-xl sm:text-2xl font-bold text-blue-600 mt-auto">
                     {formatPrice(product.price)}
                 </div>
             </CardBody>
 
-            <CardFooter className="flex gap-2">
+            <CardFooter className="flex flex-col sm:flex-row gap-2 p-3 sm:p-4">
                 <Button
-
-
-                    className="flex-1 flex items-center justify-center gap-2"
+                    size="small"
+                    className="flex-1 flex items-center justify-center gap-1 sm:gap-2 w-full sm:w-auto px-2 py-1 sm:px-3 sm:py-2 text-xs sm:text-sm"
                     onClick={() => onEdit(product)}
+                    severity="warning"
                 >
-                    <Edit className="w-4 h-4" />
+                    <Edit className="w-3 h-3 sm:w-4 sm:h-4" />
                     Edit
                 </Button>
                 <Button
-
-
-                    className="flex-1 flex items-center justify-center gap-2"
+                    size="small"
+                    className="flex-1 flex items-center justify-center gap-1 sm:gap-2 w-full sm:w-auto px-2 py-1 sm:px-3 sm:py-2 text-xs sm:text-sm"
                     onClick={() => onDelete(product)}
+                    severity="danger"
                 >
-                    <Trash2 className="w-4 h-4" />
+                    <Trash2 className="w-3 h-3 sm:w-4 sm:h-4" />
                     Delete
                 </Button>
             </CardFooter>

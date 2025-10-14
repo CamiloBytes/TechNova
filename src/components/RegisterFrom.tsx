@@ -23,8 +23,8 @@ export const RegisterFrom = () => {
     };
 
     return (
-        <div className="max-w-md mx-auto mt-10">
-            <h2 className="text-2xl font-bold mb-4">Register</h2>
+        <div className="max-w-md mx-auto mt-8 sm:mt-10 px-4 sm:px-0">
+            <h2 className="text-xl sm:text-2xl font-bold mb-4">Register</h2>
             <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="p-field">
                     <InputText
@@ -62,10 +62,11 @@ export const RegisterFrom = () => {
                     type="submit"
                     label={isLoading ? 'Registering...' : 'Register'}
                     disabled={isLoading}
-                    className="w-full"
+                    size="small"
+                    className="w-full px-4 py-2 text-sm"
                 />
             </form>
-            <p className="mt-4">
+            <p className="mt-4 text-sm sm:text-base">
                 Already have an account? <a href="/login" className="text-blue-500">Login</a>
             </p>
         </div>
