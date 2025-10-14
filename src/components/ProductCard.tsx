@@ -3,9 +3,10 @@ import { Package, Edit, Trash2 } from 'lucide-react';
 
 
 import { Product } from '../types';
-import { Button } from './Button';
-import { Badge } from './Badge';
+
+import { Badge } from 'primereact/badge';
 import { Card, CardBody, CardFooter } from './Card';
+import { Button } from 'primereact/button';
 ;
 
 interface ProductCardProps {
@@ -16,13 +17,13 @@ interface ProductCardProps {
 
 export function ProductCard({ product, onEdit, onDelete }: ProductCardProps) {
     const getCategoryColor = (category: string) => {
-        const colors: Record<string, 'info' | 'success' | 'warning' | 'default'> = {
+        const colors: Record<string, 'info' | 'success' | 'warning' | 'contrast'> = {
             laptops: 'info',
             monitors: 'success',
             peripherals: 'warning',
-            accessories: 'default',
+            accessories: 'contrast',
         };
-        return colors[category] || 'default';
+        return colors[category] || 'contrast';
     };
 
     const formatPrice = (price: number) => {
@@ -34,7 +35,7 @@ export function ProductCard({ product, onEdit, onDelete }: ProductCardProps) {
 
     return (
         <Card hover className="h-full flex flex-col">
-            <div className="aspect-video bg-gray-100 relative overflow-hidden">
+            <div className="aspect-video bg-gray-100 relative overflow-hidden ">
                 {product.image_url ? (
                     <img
                         src={product.image_url}
@@ -46,7 +47,7 @@ export function ProductCard({ product, onEdit, onDelete }: ProductCardProps) {
                             const parent = target.parentElement;
                             if (parent) {
                                 const icon = document.createElement('div');
-                                icon.className = 'w-full h-full flex items-center justify-center';
+                                icon.className = 'w-full h-full flex items-center justify-center ';
                                 icon.innerHTML = '<svg class="w-16 h-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>';
                                 parent.appendChild(icon);
                             }
@@ -58,9 +59,7 @@ export function ProductCard({ product, onEdit, onDelete }: ProductCardProps) {
                     </div>
                 )}
                 <div className="absolute top-2 right-2">
-                    <Badge variant={product.is_active ? 'success' : 'danger'} size="sm">
-                        {product.is_active ? 'Active' : 'Inactive'}
-                    </Badge>
+                    <Badge severity={product.is_active ? 'success' : 'danger'} value={product.is_active ? 'Active' : 'Inactive'} />
                 </div>
             </div>
 
@@ -89,9 +88,7 @@ export function ProductCard({ product, onEdit, onDelete }: ProductCardProps) {
                 </div>
 
                 <div className="flex items-center gap-2 mb-4">
-                    <Badge variant={getCategoryColor(product.category)} size="sm">
-                        {product.category}
-                    </Badge>
+                    <Badge severity={getCategoryColor(product.category)} value={product.category} />
                 </div>
 
                 <div className="text-2xl font-bold text-blue-600 mt-auto">
@@ -101,8 +98,8 @@ export function ProductCard({ product, onEdit, onDelete }: ProductCardProps) {
 
             <CardFooter className="flex gap-2">
                 <Button
-                    variant="primary"
-                    size="sm"
+
+
                     className="flex-1 flex items-center justify-center gap-2"
                     onClick={() => onEdit(product)}
                 >
@@ -110,8 +107,8 @@ export function ProductCard({ product, onEdit, onDelete }: ProductCardProps) {
                     Edit
                 </Button>
                 <Button
-                    variant="danger"
-                    size="sm"
+
+
                     className="flex-1 flex items-center justify-center gap-2"
                     onClick={() => onDelete(product)}
                 >

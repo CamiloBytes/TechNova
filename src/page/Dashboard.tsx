@@ -5,8 +5,8 @@ import { toast } from 'react-toastify';
 import { Plus, Search, LogOut, Package, Filter } from 'lucide-react';
 import type { Product, ProductFormData } from '../types';
 import axios from 'axios';
-import { Badge } from '../components/Badge';
-import { Button } from '../components/Button';
+import { Badge } from 'primereact/badge';
+import { Button } from 'primereact/button';
 import { ProductCard } from '../components/ProductCard';
 import { ProductForm } from '../components/ProductFrom';
 
@@ -152,17 +152,17 @@ export function Dashboard() {
                         <div className="flex items-center gap-4">
                             <div className="text-right">
                                 <p className="text-sm font-medium text-gray-800">{user?.name}</p>
-                                <Badge variant="info" size="sm">{user?.role}</Badge>
+                                <Badge severity="info" value={user?.role} />
                             </div>
                             <Button
-                                variant="outline"
-                                size="sm"
+                                severity="secondary"
+                                size="small"
+                                icon={<LogOut size={16} />}
+                                label="Logout"
                                 onClick={handleLogout}
+                                text
                                 className="flex items-center gap-2"
-                            >
-                                <LogOut className="w-4 h-4" />
-                                Logout
-                            </Button>
+                            />
                         </div>
                     </div>
                 </div>
@@ -176,14 +176,12 @@ export function Dashboard() {
                             <p className="text-gray-600 mt-1">Manage your technology products inventory</p>
                         </div>
                         <Button
-                            variant="primary"
-                            size="lg"
+                            size="large"
+                            icon={<Plus size={20} />}
+                            label="Add Product"
                             onClick={() => setShowForm(true)}
                             className="flex items-center gap-2"
-                        >
-                            <Plus className="w-5 h-5" />
-                            Add Product
-                        </Button>
+                        />
                     </div>
 
                     <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 space-y-4">
@@ -257,7 +255,7 @@ export function Dashboard() {
                                 ? 'Try adjusting your filters'
                                 : 'Get started by adding your first product'}
                         </p>
-                        <Button variant="primary" onClick={() => setShowForm(true)}>
+                        <Button label="Add Your First Product" onClick={() => setShowForm(true)}>
                             Add Your First Product
                         </Button>
                     </div>
