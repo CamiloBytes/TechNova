@@ -70,7 +70,6 @@ export function ProductForm({ product, onSubmit, onCancel }: ProductFormProps) {
         try {
             await onSubmit(data);
         } catch (error: any) {
-            // Handle server errors if needed, e.g., setError for specific fields
             console.error('Error submitting form:', error);
         }
     };
