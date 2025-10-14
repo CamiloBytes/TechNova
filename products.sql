@@ -1,0 +1,13 @@
+CREATE TABLE products (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    sku VARCHAR(255) UNIQUE,
+    name VARCHAR(255),
+    brand VARCHAR(255),
+    quantity INT,
+    price DECIMAL(10,2),
+    is_active TINYINT(1) DEFAULT 1,
+    category VARCHAR(255),
+    image_url VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
