@@ -65,7 +65,7 @@ export const LoginFrom = () => {
                         <InputText
                             id="user_name"
                             {...register("user_name", { required: "Username is required" })}
-                            className="w-full"
+                            className="w-75"
                         />
                         <label htmlFor="user_name">Username</label>
                         </FloatLabel>
@@ -84,10 +84,11 @@ export const LoginFrom = () => {
                                     onChange={(e) => field.onChange(e.target.value)}
                                     feedback={false}
                                     toggleMask
+                                    className='w-full!'
                                 />
                             )}
                         />
-                        <label htmlFor="password">Password</label>
+                        <label htmlFor="password" className='absolute left-3 top-2 text-gray-500 text-sm transition-all peer-placeholder-shown:top-5 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-2 peer-focus:text-sm peer-focus:text-blue-600'>Password</label>
                         </FloatLabel>
                         {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
                     </div>

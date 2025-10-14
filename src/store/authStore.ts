@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import type {  UserFormData, AuthState, UserSummary, User } from '../types';
 import { api } from '../service';
 import { persist, createJSONStorage } from 'zustand/middleware';
+import axios from 'axios';
 
 interface AuthStore extends AuthState {
     login: (userData: UserSummary) => void;
@@ -10,6 +11,14 @@ interface AuthStore extends AuthState {
     setLoading: (isLoading: boolean) => void;
 }
 
+// Axios interceptor to add user name header for authenticated requests
+axios.interceptors.request.use((config) => {
+    const user = JSON.parse(localStorage.getItem('auth-storage') || '{}')?.state?.user;
+    if (user?.user_name) {
+        config.headers['x-user-name'] = user.user_name;
+    }
+    return config;
+});
 
 export const useAuthStore = create<AuthStore>()(
     persist(

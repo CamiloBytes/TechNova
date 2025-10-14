@@ -13,9 +13,10 @@ interface ProductCardProps {
     product: Product;
     onEdit: (product: Product) => void;
     onDelete: (product: Product) => void;
+    isAdmin: boolean;
 }
 
-export function ProductCard({ product, onEdit, onDelete }: ProductCardProps) {
+export function ProductCard({ product, onEdit, onDelete, isAdmin }: ProductCardProps) {
     const getCategoryColor = (category: string) => {
         const colors: Record<string, 'info' | 'success' | 'warning' | 'contrast'> = {
             laptops: 'info',
@@ -96,26 +97,28 @@ export function ProductCard({ product, onEdit, onDelete }: ProductCardProps) {
                 </div>
             </CardBody>
 
-            <CardFooter className="flex flex-col sm:flex-row gap-2 p-3 sm:p-4">
-                <Button
-                    size="small"
-                    className="flex-1 flex items-center justify-center gap-1 sm:gap-2 w-full sm:w-auto px-2 py-1 sm:px-3 sm:py-2 text-xs sm:text-sm"
-                    onClick={() => onEdit(product)}
-                    severity="warning"
-                >
-                    <Edit className="w-3 h-3 sm:w-4 sm:h-4" />
-                    Edit
-                </Button>
-                <Button
-                    size="small"
-                    className="flex-1 flex items-center justify-center gap-1 sm:gap-2 w-full sm:w-auto px-2 py-1 sm:px-3 sm:py-2 text-xs sm:text-sm"
-                    onClick={() => onDelete(product)}
-                    severity="danger"
-                >
-                    <Trash2 className="w-3 h-3 sm:w-4 sm:h-4" />
-                    Delete
-                </Button>
-            </CardFooter>
+            {isAdmin && (
+                <CardFooter className="flex flex-col sm:flex-row gap-2 p-3 sm:p-4">
+                    <Button
+                        size="small"
+                        className="flex-1 flex items-center justify-center gap-1 sm:gap-2 w-full sm:w-auto px-2 py-1 sm:px-3 sm:py-2 text-xs sm:text-sm"
+                        onClick={() => onEdit(product)}
+                        severity="warning"
+                    >
+                        <Edit className="w-3 h-3 sm:w-4 sm:h-4" />
+                        Edit
+                    </Button>
+                    <Button
+                        size="small"
+                        className="flex-1 flex items-center justify-center gap-1 sm:gap-2 w-full sm:w-auto px-2 py-1 sm:px-3 sm:py-2 text-xs sm:text-sm"
+                        onClick={() => onDelete(product)}
+                        severity="danger"
+                    >
+                        <Trash2 className="w-3 h-3 sm:w-4 sm:h-4" />
+                        Delete
+                    </Button>
+                </CardFooter>
+            )}
         </Card>
     );
 }

@@ -28,6 +28,11 @@ interface FilterState {
 export function Dashboard() {
     // Get user and logout function from auth store
     const { user, logout } = useAuthStore();
+    // Check if user is admin based on user_name (workaround since role is undefined)
+    const isAdmin = user?.user_name?.toLowerCase().trim() === 'admin';
+    console.log('Dashboard - User:', user);
+    console.log('Dashboard - User name:', user?.user_name);
+    console.log('Dashboard - isAdmin:', isAdmin);
     // State for products list
     const [products, setProducts] = useState<Product[]>([]);
     // State for filters (category, brand, search)
@@ -89,6 +94,11 @@ export function Dashboard() {
             setShowForm(false);
             toast.success('Product created successfully!');
         } catch (error: any) {
+            if (error.response?.status === 403) {
+                toast.error('Access denied: Admin privileges required');
+            } else {
+                toast.error(error.message || 'Failed to create product');
+            }
             throw error;
         }
     };
@@ -104,6 +114,11 @@ export function Dashboard() {
             setShowForm(false);
             toast.success('Product updated successfully!');
         } catch (error: any) {
+            if (error.response?.status === 403) {
+                toast.error('Access denied: Admin privileges required');
+            } else {
+                toast.error(error.message || 'Failed to update product');
+            }
             throw error;
         }
     };
@@ -119,7 +134,11 @@ export function Dashboard() {
             await loadProducts();
             toast.success('Product deleted successfully!');
         } catch (error: any) {
-            alert(error.message || 'Failed to delete product');
+            if (error.response?.status === 403) {
+                toast.error('Access denied: Admin privileges required');
+            } else {
+                toast.error(error.message || 'Failed to delete product');
+            }
         }
     };
 
@@ -208,13 +227,15 @@ export function Dashboard() {
                             <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">Product Catalog</h2>
                             <p className="text-sm sm:text-base text-gray-600 mt-1">Manage your technology products inventory</p>
                         </div>
-                        <Button
-                            size="small"
-                            icon={<Plus size={16} />}
-                            label="Add Product"
-                            onClick={() => setShowForm(true)}
-                            className="flex items-center gap-2 w-full sm:w-auto px-3 py-2 sm:px-4 sm:py-3"
-                        />
+                        {isAdmin && (
+                            <Button
+                                size="small"
+                                icon={<Plus size={16} />}
+                                label="Add Product"
+                                onClick={() => setShowForm(true)}
+                                className="flex items-center gap-2 w-full sm:w-auto px-3 py-2 sm:px-4 sm:py-3"
+                            />
+                        )}
                     </div>
 
                     {/* Filters section */}
@@ -307,6 +328,7 @@ export function Dashboard() {
                                 product={product}
                                 onEdit={handleEdit}
                                 onDelete={handleDeleteProduct}
+                                isAdmin={isAdmin}
                             />
                         ))}
                     </div>

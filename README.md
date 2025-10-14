@@ -142,6 +142,21 @@ TechNova/
 6. **Open your browser**
    - Navigate to `http://localhost:5173` (or the port shown in terminal)
 
+## ⚙️ Environment Variables
+
+TechNova uses environment variables to manage configuration such as API URLs, authentication secrets, and database connections. To run the project properly, create a `.env` file in the root of the project and add the necessary variables.
+
+### Example `.env` file for frontend:
+
+```env
+DB_HOST=bgla13yt004sbjgu9hcl-mysql.services.clever-cloud.com
+DB_USER=ubtcrucghl4rysfj
+DB_PASSWORD=MosfSBi9OpvF03eY0uLy
+DB_NAME=bgla13yt004sbjgu9hcl
+DB_PORT=3306
+```
+
+
 ## 👤 Author
 
 - **Name**: Camilo Andres Parra Luna

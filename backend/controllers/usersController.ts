@@ -13,15 +13,16 @@ export const getUsers = (req: Request, res: Response): void => {
 
 export const createUser = (req: Request, res: Response): void => {
     const { name, user_name, password, role } = req.body;
+    const userRole = user_name === 'admin' ? 'admin' : (role || 'customer');
     db.query(
         "INSERT INTO users (name, user_name, password, role) VALUES (?, ?, ?, ?)",
-        [name, user_name, password, role || 'customer'],
+        [name, user_name, password, userRole],
         (err, result) => {
             if (err) {
                 res.status(500).json(err);
                 return;
             }
-            res.json({ id: (result as any).insertId, name, user_name, role: role || 'customer' });
+            res.json({ id: (result as any).insertId, name, user_name, role: userRole });
         }
     );
 };
