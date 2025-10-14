@@ -3,11 +3,14 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import { PrimeReactProvider } from 'primereact/api';
 import App from './App.tsx'
+import { BrowserRouter } from 'react-router-dom';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <PrimeReactProvider>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </PrimeReactProvider>
   </StrictMode>,
 )

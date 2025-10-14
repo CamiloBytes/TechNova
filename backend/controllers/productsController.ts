@@ -2,7 +2,28 @@ import { Request, Response } from "express";
 import db from "../db";
 
 export const getProducts = (req: Request, res: Response): void => {
-    db.query("SELECT * FROM products", (err, results) => {
+    const { searchQuery, category, brand } = req.query;
+
+    let query = "SELECT * FROM products WHERE 1=1";
+    const params: any[] = [];
+
+    if (searchQuery) {
+        query += " AND (name LIKE ? OR sku LIKE ? OR brand LIKE ?)";
+        const searchPattern = `%${searchQuery}%`;
+        params.push(searchPattern, searchPattern, searchPattern);
+    }
+
+    if (category && category !== 'all') {
+        query += " AND category = ?";
+        params.push(category);
+    }
+
+    if (brand && brand !== 'all') {
+        query += " AND brand = ?";
+        params.push(brand);
+    }
+
+    db.query(query, params, (err, results) => {
         if (err) {
             res.status(500).json(err);
             return;

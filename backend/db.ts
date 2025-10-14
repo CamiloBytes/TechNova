@@ -21,7 +21,7 @@ const connection = mysql.createPool({
 
 
 connection.getConnection((err, conn) => {
-  if (!!err) {
+  if (err) {
     console.error("Error al conectar a la base de datos:", err.message);
   } else {
     console.log("Conectado a Clever Cloud MySQL!");
